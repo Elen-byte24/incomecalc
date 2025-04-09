@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Калькулятор личного дохода</title>
+
+
+  <!-- Шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Библиотеки для экспорта XLSX, PDF -->
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+  
+  <script type="module" crossorigin src="/assets/index-CHJMbFoJ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DMfB-c_S.css">
+</head>
+<body>
+  <!-- Верхняя плашка -->
+  <div class="top-banner">
+      <span class="made-by">Сделано </span><a class="polarai-link" href="https://t.me/polaraicom"
+      target="_blank">PolarAI</a>
+  </div>
+
+  <!-- Шапка -->
+  <header>
+    <h1>Калькулятор личного дохода</h1>
+    <p class="subtitle">Прогнозируйте ваши доходы и расходы на год вперёд!</p>
+  </header>
+
+  <main>
+    <!-- Раздел "Доходы" -->
+    <section class="section" id="income-section">
+      <h2>Доходы</h2>
+      <div id="income-container">
+        <div class="item-row">
+          <!-- Выбор вида дохода -->
+          <select class="income-kind">
+            <option value="Зарплата">Зарплата</option>
+            <option value="Пособия(пенсии)">Пособия(пенсии, алименты)</option>
+            <option value="Фриланс">Фриланс</option>
+            <option value="Пассивный доход">Пассивный доход</option>
+            <option value="Дополнительный доход">Дополнительный доход</option>
+          </select>
+
+          <label>
+            С:
+            <select class="start-month">
+              <option value="1">Янв</option>
+              <option value="2">Фев</option>
+              <option value="3">Мар</option>
+              <option value="4">Апр</option>
+              <option value="5">Май</option>
+              <option value="6">Июн</option>
+              <option value="7">Июл</option>
+              <option value="8">Авг</option>
+              <option value="9">Сен</option>
+              <option value="10">Окт</option>
+              <option value="11">Ноя</option>
+              <option value="12">Дек</option>
+            </select>
+          </label>
+          <label>
+            По:
+            <select class="end-month">
+              <option value="1">Янв</option>
+              <option value="2">Фев</option>
+              <option value="3">Мар</option>
+              <option value="4">Апр</option>
+              <option value="5">Май</option>
+              <option value="6">Июн</option>
+              <option value="7">Июл</option>
+              <option value="8">Авг</option>
+              <option value="9">Сен</option>
+              <option value="10">Окт</option>
+              <option value="11">Ноя</option>
+              <option value="12" selected>Дек</option>
+            </select>
+          </label>
+          <select class="type-input">
+            <option value="monthly">Сумма на каждый месяц</option>
+            <option value="total">Общая сумма за период</option>
+          </select>
+          <input type="number" class="amount" placeholder="Сумма" />
+          <button type="button" class="remove-btn">Удалить</button>
+        </div>
+      </div>
+      <button type="button" class="add-btn" id="add-income">+ Добавить доход</button>
+    </section>
+
+    <!-- Раздел "Расходы" -->
+    <section class="section" id="expense-section">
+      <h2>Расходы</h2>
+      <div id="expense-container">
+        <div class="item-row">
+          <select class="expense-kind">
+            <option value="Жилье">Жилье</option>
+            <option value="Кредиты">Кредиты</option>
+            <option value="Питание">Питание</option>
+            <option value="Транспорт">Транспорт</option>
+            <option value="Коммунальные расходы">Коммунальные расходы</option>
+            <option value="Связь">Связь</option>
+            <option value="Обучение">Обучение</option>
+            <option value="Расходы на семью">Расходы на семью</option>
+            <option value="Развлечения">Развлечения</option>
+            <option value="Другое">Другое</option>
+            <option value="Дополнительные расходы">Дополнительные расходы</option>
+          </select>
+
+          <label>
+            С:
+            <select class="start-month">
+              <option value="1">Янв</option>
+              <option value="2">Фев</option>
+              <option value="3">Мар</option>
+              <option value="4">Апр</option>
+              <option value="5">Май</option>
+              <option value="6">Июн</option>
+              <option value="7">Июл</option>
+              <option value="8">Авг</option>
+              <option value="9">Сен</option>
+              <option value="10">Окт</option>
+              <option value="11">Ноя</option>
+              <option value="12">Дек</option>
+            </select>
+          </label>
+          <label>
+            По:
+            <select class="end-month">
+              <option value="1">Янв</option>
+              <option value="2">Фев</option>
+              <option value="3">Мар</option>
+              <option value="4">Апр</option>
+              <option value="5">Май</option>
+              <option value="6">Июн</option>
+              <option value="7">Июл</option>
+              <option value="8">Авг</option>
+              <option value="9">Сен</option>
+              <option value="10">Окт</option>
+              <option value="11">Ноя</option>
+              <option value="12" selected>Дек</option>
+            </select>
+          </label>
+          <select class="type-input">
+            <option value="monthly">Сумма на каждый месяц</option>
+            <option value="total">Общая сумма за период</option>
+          </select>
+          <input type="number" class="amount" placeholder="Сумма" />
+          <button type="button" class="remove-btn">Удалить</button>
+        </div>
+      </div>
+      <button type="button" class="add-btn" id="add-expense">+ Добавить расход</button>
+    </section>
+
+    <!-- Раздел "Налоги" -->
+    <section class="section" id="tax-section">
+      <h2>Налоги</h2>
+      <div id="tax-container">
+        <div class="item-row">
+          <select class="tax-kind">
+            <option value="Самозанятость">Самозанятость</option>
+            <option value="Транспортный налог">Транспортный налог</option>
+            <option value="Имущественный налог">Имущественный налог</option>
+            <option value="Другой налог">Другой налог</option>
+          </select>
+
+          <label>
+            С:
+            <select class="start-month">
+              <option value="1">Янв</option>
+              <option value="2">Фев</option>
+              <option value="3">Мар</option>
+              <option value="4">Апр</option>
+              <option value="5">Май</option>
+              <option value="6">Июн</option>
+              <option value="7">Июл</option>
+              <option value="8">Авг</option>
+              <option value="9">Сен</option>
+              <option value="10">Окт</option>
+              <option value="11">Ноя</option>
+              <option value="12">Дек</option>
+            </select>
+          </label>
+          <label>
+            По:
+            <select class="end-month">
+              <option value="1">Янв</option>
+              <option value="2">Фев</option>
+              <option value="3">Мар</option>
+              <option value="4">Апр</option>
+              <option value="5">Май</option>
+              <option value="6">Июн</option>
+              <option value="7">Июл</option>
+              <option value="8">Авг</option>
+              <option value="9">Сен</option>
+              <option value="10">Окт</option>
+              <option value="11">Ноя</option>
+              <option value="12" selected>Дек</option>
+            </select>
+          </label>
+          <select class="tax-mode">
+            <option value="percent">%</option>
+            <option value="fixed">Фикс</option>
+          </select>
+          <input type="number" class="tax-value" placeholder="Значение" />
+          <button type="button" class="remove-btn">Удалить</button>
+        </div>
+      </div>
+      <button type="button" class="add-btn" id="add-tax">+ Добавить налог</button>
+    </section>
+
+    <!-- Раздел "Копилка" -->
+    <section class="section" id="savings-section">
+      <h2>Копилка</h2>
+      <div class="savings-block">
+        <label>Название цели:
+          <input type="text" id="savings-goal-name" placeholder="Например, Путешествие" />
+        </label>
+        <label>Сумма цели (₽):
+          <input type="number" id="savings-goal-amount" placeholder="0" />
+        </label>
+        <label>С (месяц):
+          <select id="savings-start-month">
+            <option value="1">Янв</option>
+            <option value="2">Фев</option>
+            <option value="3">Мар</option>
+            <option value="4">Апр</option>
+            <option value="5">Май</option>
+            <option value="6">Июн</option>
+            <option value="7">Июл</option>
+            <option value="8">Авг</option>
+            <option value="9">Сен</option>
+            <option value="10">Окт</option>
+            <option value="11">Ноя</option>
+            <option value="12">Дек</option>
+          </select>
+        </label>
+        <label>По (месяц):
+          <select id="savings-end-month">
+            <option value="1">Янв</option>
+            <option value="2">Фев</option>
+            <option value="3">Мар</option>
+            <option value="4">Апр</option>
+            <option value="5">Май</option>
+            <option value="6">Июн</option>
+            <option value="7">Июл</option>
+            <option value="8">Авг</option>
+            <option value="9">Сен</option>
+            <option value="10">Окт</option>
+            <option value="11">Ноя</option>
+            <option value="12" selected>Дек</option>
+          </select>
+        </label>
+      </div>
+      <!-- Показывать ежемесячный взнос -->
+      <div id="savings-calculation" class="hidden">
+        <p>Ежемесячный взнос: <span id="monthly-savings">0</span> ₽</p>
+      </div>
+    </section>
+
+    <!-- Кнопки "Рассчитать" и Экспорт -->
+    <div class="buttons-row">
+      <button id="calculate-btn" class="calculate-btn">Рассчитать</button>
+      <button id="export-xlsx" class="export-btn">Экспорт в XLSX</button>
+      <button id="export-pdf" class="export-btn">Экспорт в PDF</button>
+    </div>
+
+    <!-- Секция результатов -->
+    <section id="result-section" class="hidden">
+      <h2>Результаты</h2>
+      <table id="result-table">
+        <thead>
+          <tr>
+            <th>Месяц</th>
+            <th>Доход</th>
+            <th>Расход</th>
+            <th>Налог</th>
+            <th>Остаток</th>
+            <th>Копилка</th>
+            <th>Прибыль</th> <!-- БЫЛО "Итого" -->
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Заполняется JS-ом -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer-text">© Все права защищены. Создано PolarAI</p>
+  </footer>
+
+  <!-- Скрипт -->
+  <script src="script.js" defer></script>
+</body>
+</html>
