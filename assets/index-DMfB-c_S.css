@@ -42,8 +42,8 @@ body {
 }
 
 .polarai-link:hover {
-    text-decoration: underline;
-  }
+  text-decoration: underline;
+}
 
 .highlight-ai {
   color: #0087a8;
@@ -58,7 +58,7 @@ header {
   padding: 30px 0;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
+}
 
 header:hover {
   background: linear-gradient(to right, #90bff7, #aeddf9);
@@ -93,12 +93,9 @@ header h1 {
 
 #income-section,
 #expense-section {
-  display: inline-block;
-  vertical-align: top;
-  width: 48%;
-  box-sizing: border-box;
+  display: block;
+  width: 100%;
   margin-bottom: 20px;
-  min-height: 100%;
   background-color: hsl(180, 69%, 91%);
 }
 
@@ -108,7 +105,7 @@ header h1 {
   flex-wrap: nowrap;
   gap: 8px;
   align-items: center;
-  margin-bottom: 10 px;
+  margin-bottom: 10px;
 }
 
 .item-row label {
@@ -116,6 +113,7 @@ header h1 {
   align-items: center;
   gap: 5px;
 }
+
 .item-row select,
 .item-row input {
   padding: 6px;
@@ -125,38 +123,38 @@ header h1 {
   outline: none;
   flex-shrink: 1;
 }
+
 .item-row .amount {
   max-width: 120px;
   width: 100%;
 }
 
-.item-row .remove-btn {
+/* Кнопки удаления и добавления: одинаковый стиль */
+.remove-btn,
+.add-btn {
+  font-size: 0.9rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  min-width: 110px;
+  text-align: center;
   white-space: nowrap;
-  padding: 6 px 10 px;
+  border: none;
+  cursor: pointer;
 }
 
 .remove-btn {
   background-color: #ffc5c5;
-  border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 0.9rem;
 }
+
 .remove-btn:hover {
   background-color: #ff9e9e;
 }
 
-/* Кнопка "+ Добавить..." */
 .add-btn {
-  margin-top: 10px;
   background-color: #c3eed2;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 0.9rem;
+  margin-top: 10px;
 }
+
 .add-btn:hover {
   background-color: #9ce3b9;
 }
@@ -168,12 +166,14 @@ header h1 {
   gap: 10px;
   margin-bottom: 10px;
 }
+
 .savings-block label {
   display: flex;
   flex-direction: column;
   font-size: 0.9rem;
   color: #444;
 }
+
 .savings-block label input,
 .savings-block label select {
   margin-top: 5px;
@@ -264,6 +264,10 @@ header h1 {
   background-color: #f2f9f2;
   color: #2d4c78;
 }
+#result-table tr:last-child {
+  background-color: #d2ffd2;
+  font-weight: bold;
+}
 
 /* Подвал */
 footer {
@@ -273,11 +277,6 @@ footer {
 .footer-text {
   font-size: 0.85rem;
   color: #888;
-}
-
-#result-table tr:last-child {
-  background-color: #d2ffd2;
-  font-weight: bold;
 }
 
 /* 📱 Адаптация под мобильные устройства */
